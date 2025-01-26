@@ -2,10 +2,10 @@ import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { ThemeProvider } from "@/theme/theme-provider";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { ThemeProvider } from "./theme/theme-provider";
+import { SidebarProvider } from "./components/ui/sidebar";
 import { Provider } from "react-redux";
-import { store } from "./redux/store.ts";
+import { store } from "./redux/store";
 import RootBoundary from "./components/errors/RootBoundary";
 
 import { Layout } from "./layout";
@@ -13,8 +13,8 @@ import Index from "./pages/index";
 import NotFound from "./pages/NotFound";
 import { useTheme } from "./theme/use-theme";
 
+// Intentional error for testing
 
-// CHANGE THIS NAME
 
 const App = () => {
   const { theme } = useTheme();

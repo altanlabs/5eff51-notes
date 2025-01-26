@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import storage from 'redux-persist/lib/storage';
 
-import tablesReducer from './slices/tables.ts';
+import tablesReducer from './slices/tables';
 
 
 // ----------------------------------------------------------------------

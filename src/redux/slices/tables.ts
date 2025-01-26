@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { altan_db } from '../../utils/axios.ts';
+import { altan_db } from '../../utils/axios';
 
 // Define interfaces for the state
 interface TableRecord {

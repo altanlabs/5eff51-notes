@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { addResponseInterceptor } from './interceptors.ts';
+import { addResponseInterceptor } from './interceptors';
 
 const ALTAN_API_BASE_URL = 'https://api.altan.ai';
 

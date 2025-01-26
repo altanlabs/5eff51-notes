@@ -81,7 +81,7 @@ export default function IndexPage() {
           <Textarea
             value={folders[selectedFolder].notes[selectedNote]}
             onChange={(e) => updateNote(e.target.value)}
-            className="w-full h-full border-none bg-transparent"
+            className="w-full h-full border-none bg-yellow-200 dark:bg-yellow-300"
           />
         ) : (
           <div className="text-gray-500 dark:text-gray-400">Select a folder and note to view or edit</div>
