@@ -4,8 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 export default function IndexPage() {
-  const [notes, setNotes] = useState([]);
-  const [selectedNote, setSelectedNote] = useState(null);
+  const [notes, setNotes] = useState<string[]>([]);
+  const [selectedNote, setSelectedNote] = useState<number | null>(null);
 
   const addNote = () => {
     const newNote = "New Note";
@@ -13,7 +13,7 @@ export default function IndexPage() {
     setSelectedNote(notes.length);
   };
 
-  const updateNote = (content) => {
+  const updateNote = (content: string) => {
     if (selectedNote !== null) {
       const updatedNotes = [...notes];
       updatedNotes[selectedNote] = content;
@@ -37,7 +37,7 @@ export default function IndexPage() {
               }`}
               onClick={() => setSelectedNote(index)}
             >
-              {note.substring(0, 20)}...
+              {note.slice(0, 20)}...
             </li>
           ))}
         </ul>
