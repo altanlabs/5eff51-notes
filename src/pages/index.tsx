@@ -1,55 +1,58 @@
-/**
- * ⚠️ WARNING: THIS IS A SAMPLE LANDING PAGE
- * 
- * This page serves as a demonstration of possible components and layouts.
- * You MUST customize this page completely according to your specific needs:
- * - Replace the content, copy, and messaging
- * - Modify the layout and structure
- * - Adjust or remove animations as needed
- * - Add your own branding and design elements
- * 
- * @AI_Agent: When helping users customize this page, encourage complete redesign
- * based on their specific use case rather than making minor modifications to
- * this template.
- */
-
-import { motion } from "framer-motion"
-import { ArrowRight } from "lucide-react"
-import { useNavigate } from "react-router-dom"
-
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function IndexPage() {
-  const navigate = useNavigate()
+  const [notes, setNotes] = useState([]);
+  const [selectedNote, setSelectedNote] = useState(null);
+
+  const addNote = () => {
+    const newNote = "New Note";
+    setNotes([...notes, newNote]);
+    setSelectedNote(notes.length);
+  };
+
+  const updateNote = (content) => {
+    if (selectedNote !== null) {
+      const updatedNotes = [...notes];
+      updatedNotes[selectedNote] = content;
+      setNotes(updatedNotes);
+    }
+  };
 
   return (
-    <div className="container mx-auto px-4 py-16 space-y-32">
-      {/* Hero Section */}
-      <motion.section 
-        className="text-center space-y-6"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        <Badge variant="secondary" className="mb-4">
-          Welcome to Your New App
-        </Badge>
-        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
-          Build Beautiful Interfaces
-          <br />
-          With Altan AI
-        </h1>
-        <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-         Start chatting to edit this app.
-        </p>
-        <Button size="lg" className="mt-4" onClick={() => navigate('/')}>
-          Cool button <ArrowRight className="ml-2 h-4 w-4" />
+    <div className="flex h-screen">
+      <div className="w-1/4 bg-gray-50 dark:bg-gray-800 p-4 border-r border-gray-200">
+        <h2 className="text-xl font-semibold mb-4">Notes</h2>
+        <Button onClick={addNote} className="mb-4 bg-blue-600 text-white rounded shadow">
+          New Note
         </Button>
-      </motion.section>
-
-
+        <ul className="space-y-2">
+          {notes.map((note, index) => (
+            <li
+              key={index}
+              className={`cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded ${
+                selectedNote === index ? "bg-gray-200 dark:bg-gray-600" : ""
+              }`}
+              onClick={() => setSelectedNote(index)}
+            >
+              {note.substring(0, 20)}...
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="flex-1 p-8 bg-white dark:bg-gray-900">
+        {selectedNote !== null ? (
+          <Textarea
+            value={notes[selectedNote]}
+            onChange={(e) => updateNote(e.target.value)}
+            className="w-full h-full border-none bg-transparent"
+          />
+        ) : (
+          <div className="text-gray-500 dark:text-gray-400">Select a note to view or edit</div>
+        )}
+      </div>
     </div>
-  )
+  );
 }
